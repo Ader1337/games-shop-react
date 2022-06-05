@@ -3,6 +3,7 @@ import '../style.scss'
 import Card from './Card'
 import Preloader from './UI/Preloader';
 import ReactPaginate from 'react-paginate';
+let API_KEY = process.env.REACT_APP_API_KEY
 
 import Cart from './Cart';
 function Body() {
@@ -48,8 +49,7 @@ function Body() {
 
     useEffect(() => {
         if (isGettingData) {
-
-            fetch('https://api.rawg.io/api/games?key=36f8d32955554c34a72966f03056c842&dates=2015-01-01,2021-12-31&ordering=-added&page=' + page)
+            fetch(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2015-01-01,2021-12-31&ordering=-added&page=${page}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setGameList([...data.results])
