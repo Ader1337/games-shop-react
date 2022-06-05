@@ -3,9 +3,10 @@ import '../style.scss'
 import Card from './Card'
 import Preloader from './UI/Preloader';
 import ReactPaginate from 'react-paginate';
+import Cart from './Cart';
+
 let API_KEY = process.env.REACT_APP_API_KEY
 
-import Cart from './Cart';
 function Body() {
     const [gameList, setGameList] = useState()
     const [isGettingData, setIsGettingData] = useState(true)
