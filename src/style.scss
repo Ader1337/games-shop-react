@@ -39,6 +39,9 @@ h5,
 h6 {
     overflow-wrap: break-word;
 }
+body{
+    background-color: #e9eef2;
+}
 #root {
     font-family: "Montserrat";
     height: 100%;
@@ -47,7 +50,6 @@ h6 {
     display: flex;
     min-height: 100%;
     flex-direction: column;
-    background-color: #e9eef2;
 }
 .body {
     position: relative;
@@ -308,6 +310,7 @@ h6 {
 }
 @media screen and (max-width: 560px) {
     .cart__inner {
+
         height: 100vh;
         border-radius: 0;
     }

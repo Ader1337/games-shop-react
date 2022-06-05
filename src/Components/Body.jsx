@@ -44,6 +44,7 @@ function Body() {
     }
     const paginate = (event) => {
         setPage(event.selected + 1)
+        setGameList(null)
         setIsGettingData(true)
     }
 
@@ -54,7 +55,6 @@ function Body() {
                 .then((response) => response.json())
                 .then((data) => {
                     setGameList([...data.results])
-                    console.log(data)
                 })
 
             setIsGettingData(false)
@@ -75,23 +75,25 @@ function Body() {
                         <div className="list">
                             {gameList.map((item) => <Card manageCart={manageCart} key={item.id} item={item} />)}
                         </div>
-                        <ReactPaginate
-                            breakLabel="..."
-                            pageRangeDisplayed={1}
-                            marginPagesDisplayed={1}
-                            previousLabel={'prev'}
-                            nextLabel={'next'}
-                            pageCount={99}
-                            onPageChange={paginate}
-                            containerClassName={'pagination'}
-                            activeClassName={'active'}
-                        />
+                       
                     </>
 
                     :
                     <Preloader />
                 }
-
+                <div style={gameList ? { display: 'block' } : { display: 'none' }} className="pagination-container">
+                    <ReactPaginate 
+                        breakLabel="..."
+                        pageRangeDisplayed={1}
+                        marginPagesDisplayed={1}
+                        previousLabel={'prev'}
+                        nextLabel={'next'}
+                        pageCount={99}
+                        onPageChange={paginate}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                    />
+                </div>
             </div>
             {
                 isGoodjustAdded ?

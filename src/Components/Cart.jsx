@@ -12,15 +12,7 @@ function Cart(props) {
         setCart(cart.filter((item) => item.id !== id))
     }
 
-    useEffect(() => {
-        let total = 0
-
-        if (cart.length === 0) {
-            setIsCartOpen(false)
-        }
-        cart.forEach((item) => total += item.reviews_count * item.count)
-        setTotalSum(total)
-    }, [cart])
+   
 
     const addDublicateToCart = (id) => {
         let indexEl = cart.findIndex((el) => el.id === id)
@@ -32,6 +24,24 @@ function Cart(props) {
             setCart(cart.map((item, index) => index === indexEl ? { ...item, count: item.count - 1 } : item))
         }
     }
+    useEffect(()=> {
+        if (isCartOpen){
+            document.body.style.marginRight = "17px"
+            document.body.style.overflow = 'hidden';
+        }else {
+            document.body.style.marginRight = "0px"
+            document.body.style.overflow = 'unset';
+        }
+    }, [isCartOpen])
+    useEffect(() => {
+        let total = 0
+
+        if (cart.length === 0) {
+            setIsCartOpen(false)
+        }
+        cart.forEach((item) => total += item.reviews_count * item.count)
+        setTotalSum(total)
+    }, [cart])
 
 
     return (
