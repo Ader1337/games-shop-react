@@ -2,7 +2,7 @@
   "name": "games-proj",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Ader1337.github.io/",
+  "homepage": "https://Ader1337.github.io/games-shop-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
