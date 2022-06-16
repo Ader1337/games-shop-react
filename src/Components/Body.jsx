@@ -48,7 +48,7 @@ function Body() {
     return (
         <div className='body'>
             <Routes>
-                <Route path='/' element={<GoodsList manageCart={manageCart}/>} />
+                <Route path='/games-shop-react' element={<GoodsList manageCart={manageCart}/>} />
                 <Route path='/:slug' element={<ProductPage manageCart={manageCart} />} />
             </Routes>
             {

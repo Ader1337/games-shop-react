@@ -11,17 +11,23 @@ function ProductPage(props) {
 
     
     const { isCartOpen } = useContext(ShopContext)
-
+ 
+   
     useEffect(() => {
-
-        fetch(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setProductData(data)
-                console.log(data)
-                setIsLoading(false)
-            })
+        if(slug !== 'games-shop-react'){
+            fetch(`https://api.rawg.io/api/games/${slug}?key=${API_KEY}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setProductData(data)
+                    console.log(data)
+                    setIsLoading(false)
+                })
+        }
     }, [])
+
+   /*  if (slug === 'games-shop-react') {
+        return
+    } */
 
     return (
         <div className={"container " + (isCartOpen ? 'blur' : '')}>
