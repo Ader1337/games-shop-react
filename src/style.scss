@@ -30,6 +30,11 @@ textarea,
 select {
     font: inherit;
 }
+a{
+    color: inherit;
+    text-decoration: none;
+
+}
 p,
 h1,
 h2,
@@ -39,7 +44,7 @@ h5,
 h6 {
     overflow-wrap: break-word;
 }
-body{
+body {
     background-color: #e9eef2;
 }
 #root {
@@ -67,6 +72,7 @@ body{
     justify-content: space-between;
     align-items: center;
     &__logo {
+        color: #000;
         font-weight: 700;
         font-size: 26px;
     }
@@ -124,10 +130,24 @@ body{
     font-weight: 700;
     font-size: 18px;
 }
+.card-item__img{
+    transition: all 0.3s ease 0s;
+    
+}
 .card-item {
     display: flex;
     flex-direction: column;
     position: relative;
+    &__link{
+        &:hover{
+            figure{
+                overflow: hidden
+            }
+            .card-item__img{
+               transform: scale(0.96);
+            }
+        }
+    }
 }
 .meta-rate {
     height: 50px;
@@ -173,11 +193,11 @@ body{
     background-color: rgb(46, 44, 44);
 }
 .blur {
-  -webkit-filter: blur(5px);
-     -moz-filter: blur(5px);
-       -o-filter: blur(5px);
-      -ms-filter: blur(5px);
-          filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
 }
 .cart {
     top: 0;
@@ -299,6 +319,75 @@ body{
 .pagination li.disabled a {
     pointer-events: none;
 }
+
+.product {
+    padding: 20px 0 0 0;
+    &__top {
+        display: flex;
+    }
+    &__left {
+        flex: 0 0 50%;
+    }
+    &__right {
+        padding: 0 0 0 30px;
+        flex: 0 0 50%;
+    }
+    &__main-img {
+        border-radius: 10px;
+        object-fit: cover;
+        height: 380px;
+    }
+    &__name {
+        margin: 0 0 10px 0;
+        font-weight: 700;
+        font-size: 27px;
+    }
+    &__desc {
+    }
+    &__info-cell {
+        display: flex;
+    }
+    &__info-cell {
+        padding: 10px 0;
+        border-bottom: 1px solid #000;
+    }
+    &__price {
+        padding: 10px 0;
+        font-weight: 700;
+        font-size: 24px;
+    }
+    &__info-info {
+        margin: 0 15px 0 0;
+    }
+    &__info-value-item {
+        margin: 0 4px 0 0;
+    }
+    &__info-value {
+    }
+    &__dscr-title {
+        margin: 10px 0;
+        font-weight: 700;
+        font-size: 27px;
+    }
+    &__dscr{
+        margin: 0 0 70px 0;
+    }
+    &__genres{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__genre{
+        &:not(:last-child){
+            margin: 0 10px 0 0;
+        }
+        padding: 4px 10px;
+        border-radius: 10px;
+        background-color: #2e2c2c;
+        color: #fff;
+
+    }
+}
+
 @media screen and (max-width: 992px) {
     .list {
         grid-template-columns: repeat(3, 1fr);
@@ -317,7 +406,6 @@ body{
 }
 @media screen and (max-width: 560px) {
     .cart__inner {
-
         height: 100vh;
         border-radius: 0;
     }
@@ -330,8 +418,8 @@ body{
     .card-item__img {
         height: 280px;
     }
-   .pagination  .break{
-    display: none;
+    .pagination .break {
+        display: none;
     }
 }
 
