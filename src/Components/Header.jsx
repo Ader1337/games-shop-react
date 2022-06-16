@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ShopContext } from './../context';
 
 function Header() {
+
+  const {isCartOpen } = useContext(ShopContext)
+
   return (
     <div>
-      <div className="container">
+      <div className={"container " + (isCartOpen ? 'blur' : '')} >
         <div className="header">
           <div className="header__logo">MyProj</div>
           <nav className="header__nav">
