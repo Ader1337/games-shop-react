@@ -4,19 +4,20 @@ import Card from './Card'
 import Preloader from './UI/Preloader';
 import ReactPaginate from 'react-paginate';
 import Cart from './Cart';
+import { useContext } from 'react';
+import { ShopContext } from './../context';
 
 let API_KEY = process.env.REACT_APP_API_KEY
 
 function Body() {
-    const [gameList, setGameList] = useState()
-    const [isGettingData, setIsGettingData] = useState(true)
-    const [isGoodjustAdded, setIsGoodjustAdded] = useState(false)
-    const [cart, setCart] = useState([])
-    const [page, setPage] = useState(1)
+
+    const { page, setGameList, nameOfJustAddedProduct, paginate,
+        isCartOpen, isGoodJustAdded, setIsGoodjustAdded, addToCart,
+        isGettingData, gameList } = useContext(ShopContext)
     const timeoutID = useRef()
 
     const showMiniPopup = () => {
-        if (isGoodjustAdded === false) {
+        if (isGoodJustAdded === false) {
             timeoutID.current = setTimeout(() => {
                 setIsGoodjustAdded(false)
             }, 2500)
@@ -32,22 +33,6 @@ function Body() {
         showMiniPopup()
         addToCart(item)
     }
-    const addToCart = (item) => {
-        let indexEl = cart.findIndex((el) => el.id === item.id)
-
-        if (indexEl !== -1) {
-            //addDublicateToCart(indexEl)
-            setCart(cart.map((item, index) => index === indexEl ? { ...item, count: item.count + 1 } : item))
-        } else {
-            setCart([...cart, { ...item, count: 1 }])
-        }
-    }
-    const paginate = (event) => {
-        setPage(event.selected + 1)
-        setGameList(null)
-        setIsGettingData(true)
-    }
-
 
     useEffect(() => {
         if (isGettingData) {
@@ -57,15 +42,13 @@ function Body() {
                     setGameList([...data.results])
                 })
 
-            setIsGettingData(false)
         }
     }, [isGettingData])
 
 
-
     return (
         <div className='body'>
-            <div className="container">
+            <div className={"container " + (isCartOpen ? 'blur' : '')} >
                 <div className="warn__text">
                     *Prices are not real, and were made up for demonstration
                 </div>
@@ -75,14 +58,14 @@ function Body() {
                         <div className="list">
                             {gameList.map((item) => <Card manageCart={manageCart} key={item.id} item={item} />)}
                         </div>
-                       
+
                     </>
 
                     :
                     <Preloader />
                 }
                 <div style={gameList ? { display: 'block' } : { display: 'none' }} className="pagination-container">
-                    <ReactPaginate 
+                    <ReactPaginate
                         breakLabel="..."
                         pageRangeDisplayed={1}
                         marginPagesDisplayed={1}
@@ -95,16 +78,14 @@ function Body() {
                     />
                 </div>
             </div>
+
             {
-                isGoodjustAdded ?
-                    <div className="cart-flag">Product was added to cart</div>
+                isGoodJustAdded ?
+                    <div className="cart-flag">{nameOfJustAddedProduct} was added to cart</div>
                     :
                     null
             }
-            <Cart
-                setCart={setCart}
-                cart={cart} />
-
+            <Cart />
         </div>
     )
 }

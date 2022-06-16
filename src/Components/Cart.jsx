@@ -1,29 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import MyButton from './UI/MyButton';
 import CartItem from './CartItem';
+import { ShopContext } from './../context';
 function Cart(props) {
-    const { cart, setCart } = props
     const [totalSum, setTotalSum] = useState(0)
-    const [isCartOpen, setIsCartOpen] = useState(false)
-    const changeCartPopupStatus = () => {
-        setIsCartOpen(!isCartOpen)
-    }
-    const deleteGood = (id) => {
-        setCart(cart.filter((item) => item.id !== id))
-    }
-
    
-
-    const addDublicateToCart = (id) => {
-        let indexEl = cart.findIndex((el) => el.id === id)
-        setCart(cart.map((item, index) => index === indexEl ? { ...item, count: item.count + 1 } : item))
-    }
-    const removeDublicateFromCart = (id, crrCount) => {
-        let indexEl = cart.findIndex((el) => el.id === id)
-        if (crrCount !== 1) {
-            setCart(cart.map((item, index) => index === indexEl ? { ...item, count: item.count - 1 } : item))
-        }
-    }
+    const {closeCart, cart, isCartOpen, changeCartPopupStatus } = useContext(ShopContext)
+    
     useEffect(()=> {
         if (isCartOpen){
             document.body.style.marginRight = "17px"
@@ -33,11 +16,13 @@ function Cart(props) {
             document.body.style.overflow = 'unset';
         }
     }, [isCartOpen])
+
+
     useEffect(() => {
         let total = 0
 
         if (cart.length === 0) {
-            setIsCartOpen(false)
+            closeCart()
         }
         cart.forEach((item) => total += item.reviews_count * item.count)
         setTotalSum(total)
@@ -71,9 +56,6 @@ function Cart(props) {
                             <div className="cart__body">
                                 {cart.map((item) => <CartItem 
                                     key={item.id}
-                                    removeDublicateFromCart={removeDublicateFromCart}
-                                    addDublicateToCart={addDublicateToCart}
-                                    deleteGood={deleteGood}
                                     item={item} />)}
                             </div>
                             <div className="cart__total">Total sum: {totalSum} ₴</div>
