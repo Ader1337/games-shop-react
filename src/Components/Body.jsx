@@ -34,7 +34,7 @@ function Body() {
     }
     useEffect(() => {
         if (isGettingData) {
-            fetch(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2015-01-01,2021-12-31&ordering=-added&page=${page}`)
+            fetch(`https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);

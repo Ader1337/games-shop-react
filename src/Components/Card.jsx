@@ -1,6 +1,8 @@
 import React from 'react'
 import MyButton from './UI/MyButton';
 import { Link  } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 
 function Card(props) {
     const { name, background_image, reviews_count, metacritic,id } = props.item
@@ -9,11 +11,14 @@ function Card(props) {
             <Link className='card-item__link' to={"/" + id}>
                 {
                     background_image ?
-                        <figure> <img alt="wasn't found" src={background_image} className="card-item__img" /></figure>
+                             <LazyLoadImage loading="lazy" decoding="async" height='350px' className="card-item__img" src={background_image}/> 
                         :
-                        <figure><img alt="wasn't found" src={`https://dummyimage.com/320x350/cfcdcf/272a54&text=Img+weren't+found`} className="card-item__img" /></figure>
+                            <img alt="wasn't found" src={`https://dummyimage.com/320x350/cfcdcf/272a54&text=Img+weren't+found`} className="card-item__img" />
                 }
-                <div  className="card-item__name">
+                
+            </Link>
+            <Link className='card-item__link card-item__name-link' to={"/" + id}>
+                <div className="card-item__name">
                     {name}
                 </div>
             </Link>
